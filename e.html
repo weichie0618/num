@@ -6,13 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
-</html>
-<!DOCTYPE html>
-<html>
-  <head>
-   
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+
+  
     <style>
       body {
         font-family: Arial, Helvetica, sans-serif;
@@ -53,12 +49,10 @@
         padding: 20px;
       }
       form{
-        width: 100vw;
-        height:100vh;
-        display: flex;
-        justify-content:flex-start;
-        flex-direction: column;
-        align-items: center;
+        width: 50vh;
+        height:800px;
+        display: block;
+        
       }
       .in{
         border: none;
@@ -71,7 +65,7 @@
 
       }
     </style>
-  </head>
+  
   <body>
     
       <form action="#" method="POST" name="google">
@@ -99,10 +93,14 @@
 
         <label for="lname">請輸入匯款後5碼</label>
         <input
-          type="text"
-          id="lname"
-          name="匯款後5碼"
-          placeholder="在這輸入匯款後5碼 列如 00000"
+            type="text"
+            id="lname"
+            name="匯款後5碼"
+            placeholder="在這輸入匯款後5碼 列如 00000"
+            pattern="[0-9]{5}"
+            maxlength="5"
+            title="請輸入5個數字"
+            required
         />
 
         
@@ -111,14 +109,15 @@
           
         </div></div>
        
-        <input type="submit"  value="Submit" name="submit" />
+        <input type="submit" value="Submit" name="submit"  />
         
       </form>
+      <h4 id="completionMessage" style="display: none;text-align: center;
+      font-size: 26px">你已完成訂單</h4>
     </div>
     <script type="text/javascript">
       
-
-  
+      
 
       const scriptURL =
         "https://script.google.com/macros/s/AKfycbygEV6DKuMqJWcPhqrLoU2U0fmvnMl0mOvRmT6w5tLtw_yn-Q2Cf9c8Sxqn2zGvUg2g/exec";
@@ -126,10 +125,40 @@
 
       form.addEventListener("submit", (e) => {
         e.preventDefault();
+        const Element = document.getElementById('lname');
+        const inputValue = Element.value;
+        const pattern = /^[0-9]{5}$/;
+
+        if (!pattern.test(inputValue)) {
+            alert('請輸入5個數字！');
+            return false; // 停止表單送出
+        }
+           
+
+       
         fetch(scriptURL, { method: "POST", body: new FormData(form) })
           .then((response) => alert("你已完成訂購"))
           .catch((error) => console.error("Error!", error.message));
+           // 顯示完成訊息
+           var completionMessage = document.getElementById('completionMessage');
+            completionMessage.style.display = 'block';
+
+            // 找到輸入框元素和標籤元素
+            var inputElement = document.getElementById('lname');
+            var labelElement = document.querySelector('label[for="lname"]');
+
+            // 將輸入框和標籤從DOM中移除
+            inputElement.remove();
+            labelElement.remove();
+
+            // 找到按鈕元素
+            var submitButton = document.querySelector('input[type="submit"]');
+
+            // 將按鈕從DOM中移除
+            submitButton.remove();
+            console.log("123")
       });
+  
     </script>
   </body>
 </html>
