@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<!DOCTYPE html>
+<html>
+  <head>
+   
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+
+      input[type="text"],
+      select,
+      textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-top: 6px;
+        margin-bottom: 16px;
+        resize: vertical;
+      }
+
+      input[type="submit"] {
+        background-color: #04aa6d;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+
+      .container {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+      }
+      form{
+        width: 100vw;
+        height:100vh;
+        display: flex;
+        justify-content:flex-start;
+        flex-direction: column;
+        align-items: center;
+      }
+      .in{
+        border: none;
+  background-color: transparent;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+  padding: 0;
+
+      }
+    </style>
+  </head>
+  <body>
+    
+      <form action="#" method="POST" name="google">
+        <h3>訂單狀態</h3>
+
+    <div class="container">
+        <label for="fname">訂單號碼</label>
+        <input
+        class="in"
+          type="text"
+          id="fname"
+          name="訂單號碼"
+          value="230725B001"
+          readonly
+        />
+        <label for="name">訂單金額</label>
+        <input
+        class="in"
+          type="text"
+          id="fname"
+          name="訂單金額"
+          value="230"
+          disabled
+        />
+
+        <label for="lname">請輸入匯款後5碼</label>
+        <input
+          type="text"
+          id="lname"
+          name="匯款後5碼"
+          placeholder="在這輸入匯款後5碼 列如 00000"
+        />
+
+        
+
+        <div style="height:100px;"><div>
+          
+        </div></div>
+       
+        <input type="submit"  value="Submit" name="submit" />
+        
+      </form>
+    </div>
+    <script type="text/javascript">
+      
+
+  
+
+      const scriptURL =
+        "https://script.google.com/macros/s/AKfycbygEV6DKuMqJWcPhqrLoU2U0fmvnMl0mOvRmT6w5tLtw_yn-Q2Cf9c8Sxqn2zGvUg2g/exec";
+      const form = document.forms["google"];
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        fetch(scriptURL, { method: "POST", body: new FormData(form) })
+          .then((response) => alert("你已完成訂購"))
+          .catch((error) => console.error("Error!", error.message));
+      });
+    </script>
+  </body>
+</html>
