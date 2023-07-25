@@ -12,6 +12,7 @@
     <style>
       body {
         font-family: Arial, Helvetica, sans-serif;
+        overflow: hidden;
       }
       * {
         box-sizing: border-box;
@@ -52,6 +53,10 @@
         width: 50vh;
         height:800px;
         display: block;
+        position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -40%);
         
       }
       .in{
@@ -85,12 +90,12 @@
         <input
         class="in"
           type="text"
-          id="fname"
+          id="name"
           name="訂單金額"
           value="230"
           disabled
         />
-
+        <div style="height:50px"></div>
         <label for="lname">請輸入匯款後5碼</label>
         <input
             type="text"
@@ -116,6 +121,18 @@
       font-size: 26px">你已完成訂單</h4>
     </div>
     <script type="text/javascript">
+        window.addEventListener("DOMContentLoaded", function () {
+        // 獲取URL中的參數
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // 從URL中獲取訂單編號和訂單價格的值
+        const orderNumber = urlParams.get("A");
+        const orderPrice = urlParams.get("B");
+
+        // 更新訂單號碼和訂單金額的值
+        document.getElementById("fname").value = orderNumber;
+        document.getElementById("name").value = orderPrice;
+      });
       
       
 
